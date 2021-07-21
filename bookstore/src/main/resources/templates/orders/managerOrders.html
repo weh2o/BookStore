@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>訂單管理</title>
+    <th:block th:include="common.html :: source"></th:block>
+    <script type="text/javascript" th:src="@{/boot/js/cart.js}"></script>
+
+</head>
+<body>
+
+<!-- 引入頂部介面 -->
+<div th:include="common.html :: header"></div>
+
+<!--頁面主體內容-->
+<div class="container">
+    <div class="row">
+        <!-- 引入左側標題 -->
+        <div th:include="common.html :: managerLeftTitle"></div>
+        <!--頁面中心-->
+        <div class="col-sm-10">
+            <div class="panel panel-default">
+                <!--面板頭-->
+                <div class="panel-heading text-center">
+                    <h1>訂單管理</h1>
+                </div>
+                <!--面板的內容-->
+                <div class="panel-body">
+
+                </div>
+                <table class="table table-bordered table-condensed text-center">
+                    <tr class="active" style="font-size: 20px">
+                        <th>訂單號碼</th>
+                        <th>用戶ID</th>
+                        <th>購買時間</th>
+                        <th>狀態</th>
+                        <th>總價格</th>
+                        <th>訂單詳情</th>
+                    </tr>
+                    <!-- 訂單 -->
+                    <div th:if="${ordersList.size() != 0}">
+                        <tr style="font-size: 20px" th:each="orders:${ordersList}">
+                            <td th:text="${orders.ordersNo}"></td>
+                            <td th:text="${orders.userId}"></td>
+                            <td th:text="${#temporals.format(orders.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                            <td th:text="${orders.statusDetail}">運送中</td>
+                            <td th:text="'$' + ${#numbers.formatDecimal(orders.cost,0,0)}"></td>
+                            <td><a class="btn btn-success ordersBtn" onclick="orderDetail(this)">查看訂單詳情</a></td>
+                            <!-- 隱藏域:訂單id -->
+                            <input type="hidden" class="ordersId" th:value="${orders.id}">
+                        </tr>
+                    </div>
+                    <script>
+                        function orderDetail(obj) {
+                            let index = $(".ordersBtn").index(obj);
+                            let orderId = $(".ordersId").eq(index).val();
+                            location.href = "/ordersDetail/manager/" + orderId;
+                        }
+                    </script>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
