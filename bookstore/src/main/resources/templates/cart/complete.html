@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>購買完成</title>
+    <th:block th:include="common.html :: source"></th:block>
+    <script type="text/javascript" th:src="@{/boot/js/cart.js}"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../static/boot/css/bootstrap.min.css">
+    <script src="../../static/boot/js/jquery-3.4.1.min.js"></script>
+    <script src="../../static/boot/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../static/boot/css/style.css">
+
+    <script>
+        function goToOrdersDetail() {
+            let ordersId = $(".ordersId").val();
+            location.href = "/ordersDetail/" + ordersId;
+        }
+    </script>
+
+</head>
+<body>
+
+<!-- 引入頂部介面 -->
+<div th:include="common.html :: header"></div>
+
+<!--頁面主體內容-->
+<div class="container">
+    <div class="row">
+        <!--頁面中心-->
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <!--面板頭-->
+                <div class="panel-heading text-center">
+                    <h1>購買完成</h1>
+                </div>
+                <!--面板的內容-->
+                <div class="panel-body">
+                    <h3 class="text-center">感謝您在本店的購買! 您的訂單已經完成。</h3>
+                    <table class="table table-bordered complete-info">
+                        <tr>
+                            <td class="complete-title">購買時間</td>
+                            <td class="complete-content" th:text="${#temporals.format(orders.createTime,'yyyy-MM-dd')}">123</td>
+                        </tr>
+                        <tr>
+                            <td class="complete-title">訂單號碼</td>
+                            <td class="complete-content" th:text="${orders.ordersNo}">123</td>
+                        </tr>
+                        <tr>
+                            <td class="complete-title">金額</td>
+                            <td class="complete-content" th:text="${#numbers.formatDecimal(orders.cost,0,0)}">$100</td>
+                        </tr>
+                    </table>
+                    <div style="text-align: center;margin-top: 10px">
+                        <a class="btn btn-lg btn-success" style="width: 150px" href="/book/list">繼續購物</a>
+                        <a class="btn btn-lg btn-default" style="background-color: #c4c5c5" onclick="goToOrdersDetail()">查看訂單詳情</a>
+                        <input type="hidden" class="ordersId" th:value="${orders.id}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
