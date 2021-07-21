@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>購物車</title>
+    <th:block th:include="common.html :: source"></th:block>
+    <script type="text/javascript" th:src="@{/boot/js/cart.js}"></script>
+
+</head>
+<body>
+
+<!-- 引入頂部介面 -->
+<div th:include="common.html :: header"></div>
+
+<!--頁面主體內容-->
+<div class="container commentFontsize">
+    <div class="row">
+        <!--頁面中心-->
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <!--面板頭-->
+                <div class="panel-heading text-center">
+                    <h1>購物車</h1>
+                </div>
+                <!--面板的內容-->
+                <div class="panel-body">
+
+                </div>
+                <table class="table table-bordered table-condensed text-center">
+                    <tr class="active" style="font-size: 20px">
+                        <th style="text-align: center">商品圖片</th>
+                        <th>名稱</th>
+                        <th>單價</th>
+                        <th style="width: 130px">數量</th>
+                        <th>小計</th>
+                        <th>變更</th>
+                    </tr>
+                    <!-- 購物車內有商品時 -->
+                    <div th:if="${cartList.size() != 0}">
+                        <tr th:each="cart:${cartList}">
+                            <td><img th:src="@{/} + ${cart.photo}" style="width: 100px;height: 100px;"></td>
+                            <td style="line-height: 100px" th:text="${cart.name}"></td>
+                            <td style="line-height: 100px">NT$ <span class="price" th:text="${#numbers.formatDecimal(cart.price,0,0)}"></span></td>
+
+                            <!-- 購物車的商品數，綁上內容改變事件 -->
+                            <td>
+                                <!-- 隱藏域 -->
+                                <input type="hidden" class="cartId" th:value="${cart.id}">
+                                <input type="hidden" class="bookStock" th:value="${cart.stock}">
+                                <button class="cart-subtract glyphicon glyphicon-minus" onclick="subQuantity(this)"></button>
+                                <input type="text" class="count cartCount" th:value="${cart.quantity}" onchange="updateCount(this)">
+                                <button class="cart-add glyphicon glyphicon-plus" onclick="addQuantity(this)"></button>
+                            </td>
+
+                            <td style="line-height: 100px">NT$ <span class="cost" th:text="${#numbers.formatDecimal(cart.cost,0,0)}"></span></td>
+                            <td style=""><a class="btn btn-block btn-warning" th:href="@{/cart/delete/} + ${cart.id}">刪除</a> </td>
+                        </tr>
+                    </div>
+                </table>
+                <!-- 無商品時 -->
+                <div th:if="${cartList.size() == 0}">
+                    <br/>
+                    <h1 class="text-center cart_msg">購物車內無任何商品</h1>
+                    <br/>
+                </div>
+                <div class="panel-footer">
+                    <div class="cart_info">
+                        <span>購物車中共有<span class="cart_totalCount" text="0"></span>件商品</span>
+                        <span>總金額<span class="cart_totalAmount" text="0"></span>元</span>
+                    </div>
+                    <div style="text-align: right;margin-top: -30px" >
+                        <a class="btn btn-success" th:if="${cartList.size() == 0}" style="width: 200px" href="/book/list/1">前去購物</a>
+                        <div th:if="${cartList.size() != 0}">
+                            <a class="btn btn-danger cartBelowBtn" href="javascript:;" onclick="deleteAll()">清空購物車</a>
+                            <a class="btn btn-primary cartBelowBtn" href="/orders/check">前往結帳</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
