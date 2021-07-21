@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>註冊</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/boot/css/bootstrap.min.css}">
+    <script th:src="@{/boot/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/boot/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/boot/css/style.css}">
+
+</head>
+<body>
+    <!-- 引入頂部介面 -->
+    <div th:include="common.html :: header"></div>
+
+    <div class="container commonForm">
+        <div class="panel panel-success" >
+            <!--面板頭-->
+            <div class="panel-heading" >
+                <h2 class="text-center">註冊</h2>
+            </div>
+            <!--面板的內容-->
+            <div class="panel-body">
+                <!--表單-->
+                <form th:action="@{/user/register}" method="post" class="singIn-form" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label for="userName">帳號:</label>
+                        <input type="text" class="form-control" id="userAccount" name="userAccount" pattern="^^[a-zA-Z0-9]{4,12}" title="帳號由4-12位字母或數字組成，請勿輸入中文" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="userName">用戶名:</label>
+                        <input type="text" class="form-control" id="userName" name="userName" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">密碼:</label>
+                        <input type="password" class="form-control" id="password" name="password" pattern="^[a-zA-Z0-9]{6,10}$" title="密碼必須是6-10位字母或數字組成" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">信箱:</label>
+                        <input type="email" class="form-control" id="email" name="email" pattern="^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">電話:</label>
+                        <input type="text" class="form-control" id="phone" name="phone" pattern="^(09)\d{8}$" title="請輸入手機號碼" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">地址:</label>
+                        <input type="text" class="form-control" id="address" name="address" required/>
+                    </div>
+
+                    <div style="text-align: center">
+                        <button type="submit" class="btn btn-lg btn-block btn-primary commonBtn">註冊</button>
+                        <button type="button" class="btn btn-lg btn-block btn-danger commonBtn" onclick="returnBack()">返回首頁</button>
+                    </div>
+                    <script>
+                        function returnBack() {
+                            location.href = '[[@{/}]]';
+                        }
+                    </script>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
