@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>確認訂單</title>
+    <th:block th:include="common.html :: source"></th:block>
+    <script type="text/javascript" th:src="@{/boot/js/detail.js}"></script>
+
+</head>
+<body>
+
+<!-- 引入頂部介面 -->
+<div th:include="common.html :: header"></div>
+
+<!--頁面主體內容-->
+<div class="container commentFontsize">
+    <div class="row">
+        <!--頁面中心-->
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <!--面板頭-->
+                <div class="panel-heading text-center">
+                    <h1>確認訂單</h1>
+                </div>
+                <!--面板的內容-->
+                <div class="panel-body">
+
+                    <h3>收貨人資料</h3><button class="btn consignee-info-btn" onclick="userInfoModal()">變更資料</button>
+                    <table class="table table-bordered consignee-info">
+                        <tr>
+                            <td class="active user-name">姓名</td>
+                            <td class="user-content" id="userName" th:text="${session.user.userName}"></td>
+                        </tr>
+                        <tr>
+                            <td class="active user-phone">手機</td>
+                            <td class="user-content" id="userPhone" th:text="${session.user.phone}"></td>
+                        </tr>
+                        <tr>
+                            <td class="active user-address">地址</td>
+                            <td class="user-content" id="userAddress" th:text="${session.user.address}"></td>
+                        </tr>
+                    </table>
+
+                    <h3>商品列表</h3>
+                    <table class="table table-bordered table-condensed text-center">
+                        <tr class="active" style="font-size: 20px">
+                            <th style="text-align: center">商品圖片</th>
+                            <th>名稱</th>
+                            <th>單價</th>
+                            <th style="width: 130px">數量</th>
+                            <th>小計</th>
+                        </tr>
+                        <!-- 購物車內有商品時 -->
+                        <div th:if="${cartList.size() != 0}">
+                            <tr th:each="cart:${cartList}">
+                                <td><img th:src="@{/} + ${cart.photo}" style="width: 100px;height: 100px"></td>
+                                <td style="line-height: 100px" th:text="${cart.name}"></td>
+                                <td style="line-height: 100px">NT$ <span class="price" th:text="${#numbers.formatDecimal(cart.price,0,0)}"></span></td>
+                                <td style="line-height: 100px" class="quantity" th:text="${cart.quantity}"></td>
+                                <td style="line-height: 100px">NT$ <span class="cost" th:text="${#numbers.formatDecimal(cart.cost,0,0)}"></span></td>
+                            </tr>
+                        </div>
+                    </table>
+                </div>
+
+                <div class="panel-footer" th:if="${cartList.size() != 0}">
+                    <div class="cart_info">
+                        <span>購物車中共有<span class="cart_totalCount"></span>件商品</span>
+                        <span>總金額<span class="cart_totalAmount"></span>元</span>
+                    </div>
+                    <div style="text-align: right;margin-top: -30px" >
+                        <a class="btn btn-success cartBelowBtn" href="/cart/list" >返回購物車</a>
+                        <a class="btn btn-primary cartBelowBtn" onclick="checkout()">結帳</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模態框:收貨人資料 -->
+<div class="modal fade" id="userInfoUpdateModal">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <!--模態框頭部內容-->
+            <div class="modal-header">
+                <!-- data-dismiss="modal" 具有關閉實質功能-->
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" style="text-align: center">收貨人資料</h2>
+            </div>
+            <!--模態框內容-->
+            <form id="editUserForm">
+                <div class="modal-body" >
+                    <div style="width: 300px;font-size: 18px;margin: auto">
+                        <div class="form-group">
+                            <label for="name">姓名</label>
+                            <input type="text" class="form-control" id="name" name="userName" th:value="${session.user.userName}">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">手機</label>
+                            <input type="text" class="form-control" id="phone" name="phone" th:value="${session.user.phone}">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">地址</label>
+                            <input type="text" class="form-control" id="address" name="address" th:value="${session.user.address}">
+                        </div>
+                    </div><br>
+                    <!--模態框腳注-->
+                    <div class="modal-footer">
+                        <!-- data-dismiss="modal" 具有關閉實質功能-->
+                        <button type="button" class="btn btn-primary" onclick="userInfoUpdate()">確定修改</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消修改</button>
+                    </div>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+</body>
+</html>
