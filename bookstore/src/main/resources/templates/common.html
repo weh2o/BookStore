@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>通用介面</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/boot/css/bootstrap.min.css}">
+    <script th:src="@{/boot/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/boot/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<div th:fragment="source">
+    <link rel="stylesheet" type="text/css" th:href="@{/boot/css/bootstrap.min.css}">
+    <script th:src="@{/boot/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/boot/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/boot/css/style.css}">
+</div>
+
+    <div th:fragment="header">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <!--用來螢幕自適應-->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!--導航條標題-->
+                    <a class="navbar-brand" href="/">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <img th:src="@{/boot/imgs/booktitle2.png}" style="width: 55px;margin: -20px;float: left">
+                            </div>
+                            <div class="col-sm-10">
+                                <h1 style="margin-top: -8px;">汪汪書城</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- 導航條中加入的其他組件 -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <!-- navbar-right 右對齊 -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="menu" style="margin-top: 3px"><a>歡迎
+                            <span th:if="${session.user == null}">難民</span>
+                            <span th:if="${session.user != null}" th:text="${session.user.userName}"></span>
+                        </a></li>
+                        <!-- 根據用戶是否登入顯示不同資訊 -->
+                        <li class="menu" th:if="${session.user == null}"><a href="/register" class="btn" style="font-size: 20px"><span class="glyphicon glyphicon-user"></span> 註冊</a></li>
+                        <!-- 下拉列表 -->
+                        <li class="dropdown menu" th:if="${session.user != null}">
+                            <a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> 會員中心 </a>
+                            <!--下拉列表內容-->
+                            <ul class="dropdown-menu" style="font-size: 16px">
+                                <li><a href="/userInfo">個人資料</a></li>
+                                <li class="divider"></li><!--分隔線-->
+                                <li><a href="/orders/allUserOrders">我的訂單</a></li>
+                                <li class="divider"></li><!--分隔線-->
+                                <li><a href="/book/back">後臺管理</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="menu" style="margin-top: 12px;margin-left: -10px;">|</li>
+                        <li class="menu" th:if="${session.user == null}" style="margin-top: 2px;margin-left: -14px;margin-right: -20px"><a href="/login" class="btn" style="font-size: 20px">登入</a></li>
+                        <li class="menu inoutInfo" th:if="${session.user != null}" style="margin-top: 2px;margin-left: -14px;margin-right: -20px"><a th:href="@{/user/logout}" class="btn" style="font-size: 20px">登出</a></li>
+                        <li class="menu"><a th:href="@{/cart/list}">購物車 <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
+    <!-- header -->
+
+    <!-- 個人資料左側 -->
+    <div th:fragment="userInfo">
+        <div class="col-sm-2">
+            <ul class="list-group left-title" style="">
+                <!--列表項-->
+                <a class="list-group-item" href="/userInfo">個人資料</a>
+                <a class="list-group-item" href="/updatePassword">修改密碼</a>
+                <a class="list-group-item" href="/orders/allUserOrders">我的訂單</a>
+            </ul>
+        </div>
+    </div>
+    <!-- 後台左側標題 -->
+    <div th:fragment="managerLeftTitle">
+        <div class="col-sm-2">
+            <ul class="list-group left-title">
+                <!--列表項-->
+                <a class="list-group-item" href="/book/back">圖書管理</a>
+                <a class="list-group-item" href="/bookType/list">圖書類型管理</a>
+                <a class="list-group-item" href="/orders/allOrders">訂單管理</a>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
