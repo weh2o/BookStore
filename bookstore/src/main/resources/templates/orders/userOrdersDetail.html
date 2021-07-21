@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>訂單詳情</title>
+    <th:block th:include="common.html :: source"></th:block>
+    <script type="text/javascript" th:src="@{/boot/js/detail.js}"></script>
+
+</head>
+<body>
+
+<!-- 引入頂部介面 -->
+<div th:include="common.html :: header"></div>
+
+<!--頁面主體內容-->
+<div class="container">
+    <div class="row">
+        <!-- 引入左側連結 -->
+        <div th:include="common.html :: userInfo"></div>
+        <!--頁面中心-->
+        <div class="col-sm-10">
+            <div class="panel panel-default">
+                <!--面板頭-->
+                <div class="panel-heading text-center">
+                    <h1>訂單詳情</h1>
+                </div>
+                <!--面板的內容-->
+                <div class="panel-body">
+
+                </div>
+                <table class="table table-bordered table-condensed text-center">
+                    <tr class="active" style="font-size: 20px">
+                        <th>商品圖片</th>
+                        <th>商品名稱</th>
+                        <th>單價</th>
+                        <th>數量</th>
+                        <th>小計</th>
+                    </tr>
+                    <!-- 訂單 -->
+                    <tr style="font-size: 20px" th:each="ordersDetail:${ordersDetailList}">
+                        <td><img style="width: 100px;height: 100px" th:src="@{/} + ${ordersDetail.photo}"></td>
+                        <td style="line-height: 100px" th:text="${ordersDetail.name}"></td>
+                        <td style="line-height: 100px" th:text="'$' + ${#numbers.formatDecimal(ordersDetail.price,0,0)}"></td>
+                        <td style="line-height: 100px" class="quantity" th:text="${ordersDetail.quantity}"></td>
+                        <td style="line-height: 100px" class="cost" th:text="${#numbers.formatDecimal(ordersDetail.cost,0,0)}"></td>
+                    </tr>
+                </table>
+
+                <div class="panel-footer">
+                    <div class="cart_info">
+                        <span>總共有<span class="cart_totalCount" text="0"></span>件商品</span>
+                        <span>總金額<span class="cart_totalAmount" text="0"></span>元</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
