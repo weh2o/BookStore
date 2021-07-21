@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>作品首頁</title>
+    <th:block th:include="common.html :: source"></th:block>
+
+    <script>
+        /* 判斷庫存 */
+        function addCart(obj) {
+            let index = $(".addBtn").index(obj);
+            let stock = $(".bookStock").eq(index).text();
+            if (stock == 0){
+                return false;
+            }
+            let id = $(".bookId").eq(index).val();
+
+            $.ajax({
+                url:"/cart/add/" + id,
+                type:"get",
+                dateType:"json",
+                success:function (data) {
+                    $(".addMsg").text(data.msg)
+                    //顯示提示框
+                    $("#addMsg").show(1000);
+                    //隱藏提示框
+                    setTimeout(function () {
+                        $("#addMsg").hide(2000);
+                    },4000);
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+<!-- 引入頂部介面 -->
+<div th:include="common.html :: header"></div>
+
+<!--頁面主體內容-->
+<div class="container">
+    <div class="row">
+        <!--左側分類-->
+        <div class="col-sm-2">
+            <ul class="list-group left-title">
+                <!--列表項-->
+                <li class="list-group-item" style="background-color:#e2e2e2;">圖書分類</li>
+                <a th:each="bookType:${typeList}" th:href="@{/book/category/} + ${bookType.bookTypeId}" class="list-group-item" th:unless="${bookType.bookTypeId} == 1">
+                    <span th:text="${bookType.bookTypeName}"></span>
+                </a>
+            </ul>
+        </div>
+
+        <!--頁面中心-->
+        <div class="col-sm-10">
+            <div class="panel panel-default">
+                <!--面板頭-->
+                <div class="panel-heading text-center">
+                    <!--查詢框-->
+                    <form th:action="@{/book/search}" class="form-inline" role="form">
+                        <div class="form-group">
+                            <label for="keyword" style="font-size: 18px">搜尋</label>
+                            <input type="text" id="keyword" class="form-control" name="bookName" placeholder="請輸入書名">
+                        </div>
+                        <!--查詢按鈕-->
+                        <div class="form-group">
+                            <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </form>
+                </div>
+
+                <!--面板的內容-->
+                <div class="panel-body">
+                    <div class="row">
+                        <div th:each="book:${bookPage.getRecords()}" class="col-sm-3">
+                            <div class="thumbnail">
+                                <img th:src="@{/} + ${book.photo}" alt="..." style="height: 200px">
+                                <div style="margin-left: 17px">
+                                    <h3><b th:text="${book.name}"></b></h3>
+                                    <div class="book_info">
+                                        <p>作者: <span th:text="${book.author}"></span></p>
+                                        <p><span> 銷量: <span th:text="${book.sales}"></span></span><span> 庫存: <span class="bookStock" th:text="${book.stock}"></span></span></p>
+                                        <p>NT$: <span th:text="${#numbers.formatDecimal(book.price,0,0)}" class="book_price_color"></span></p>
+                                    </div>
+                                </div>
+                                <input type="hidden" class="bookId" th:value="${book.id}">
+                                <a class="btn btn-primary addBtn" style="margin-left: 50px" th:disabled="${book.stock == 0}" onclick="addCart(this)">放入購物車</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--分頁-->
+                    <div class="text-center">
+                        <nav aria-label="Page navigation" >
+                            <ul class="pagination">
+                                <!-- 上一頁 -->
+                                <li th:if="${bookPage.getCurrent()} > 1">
+                                    <a th:href="@{/book/list/} + ${bookPage.getCurrent() -1}" aria-label="Previous">
+                                        <span aria-hidden="true">上一頁</span>
+                                    </a>
+                                </li>
+
+                                <!-- 下一頁 -->
+                                <li th:if="${bookPage.getPages()} > ${bookPage.getCurrent()}">
+                                    <a th:href="@{/book/list/} + ${bookPage.getCurrent() +1}" aria-label="Next">
+                                        <span aria-hidden="true">下一頁</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!--提示框-->
+            <div class="alert alert-info" id="addMsg" style="width: 400px;margin: auto;font-size: 20px;display: none">
+                <!--添加關閉的按鈕。 設置close類 以及 <span>標籤的 x 圖示 -->
+                <!--在<button>標籤中使用 data-dismiss="alert" 才可以觸發關閉-->
+                <button class="close" data-dismiss="alert" > <span>&times;</span></button>
+                <div class="addMsg text-center">尚未登入  添加無效!!</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+</script>
+</body>
+</html>
