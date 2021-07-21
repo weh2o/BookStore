@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改頁面</title>
+    <th:block th:include="common.html :: source"></th:block>
+
+</head>
+<body>
+
+<!-- 引入頂部介面 -->
+<div th:include="common.html :: header"></div>
+
+<div class="container commentFontsize">
+    <div class="row">
+        <!-- 引入左側標題 -->
+        <div th:include="common.html :: managerLeftTitle"></div>
+        <!--頁面中心-->
+        <div class="col-sm-10">
+            <!--  表格  -->
+            <div class="container commonForm">
+                <div class="panel panel-success">
+                    <!--面板頭-->
+                    <div class="panel-heading" >
+                        <h2 class="text-center">修改圖書資料</h2>
+                    </div>
+                    <!--面板的內容-->
+                    <div class="panel-body">
+                        <!--表單-->
+                        <form th:action="@{/book/update}" method="post" class="singIn-form" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="name">商品名稱:</label>
+                                <input type="text" class="form-control" id="name" name="name" th:value="${book.name}">
+                                <!-- 隱藏域:傳給後台id -->
+                                <input type="hidden" name="id" th:value="${book.id}">
+                            </div>
+
+                            <div class="form-group">
+                                <label >商品圖片:</label><br/>
+                                <img th:src="@{/} + ${book.photo}" style="width: 100px">
+                                <!-- 隱藏域: 回傳原有的圖片 -->
+                                <input type="hidden" name="photo" th:value="${book.photo}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="newfile" class="btn btn-default" >上傳新的圖片</label>
+                                <input type="file" id="newfile" name="img" style="display: none"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="author">作者:</label>
+                                <input type="text" class="form-control" id="author" name="author" th:value="${book.author}">
+                            </div>
+                            <div class="form-group">
+                                <label>類型:</label>
+                                <select class="form-control" name="bookTypeId">
+                                    <option th:each="bookType:${typeList}"
+                                            th:value="${bookType.bookTypeId}"
+                                            th:text="${bookType.bookTypeName}"
+                                            th:selected="${bookType.bookTypeId} == ${book.bookTypeId}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="price">價格:</label>
+                                <input type="text" class="form-control" id="price" name="price" th:value="${#numbers.formatDecimal(book.price,0,0)}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="stock">庫存:</label>
+                                <input type="text" class="form-control" id="stock" name="stock" th:value="${book.stock}"/>
+                            </div>
+
+                            <div style="text-align: center">
+                                <button type="submit" class="btn btn-lg btn-block btn-primary commonBtn">確定修改</button>
+                                <button type="button" class="btn btn-lg btn-block btn-danger commonBtn" onclick="returnBack()" >返回列表</button>
+                            </div>
+                            <script>
+                                function returnBack() {
+                                    location.href = "/book/back";
+                                }
+                            </script>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
