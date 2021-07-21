@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>圖書類型管理</title>
+    <th:block th:include="common.html :: source"></th:block>
+    <script type="text/javascript" th:src="@{/boot/js/managerBookType.js}"></script>
+
+</head>
+<body>
+<!-- 引入頂部介面 -->
+<div th:include="common.html :: header"></div>
+
+<!--頁面主體內容-->
+<div class="container commentFontsize">
+    <div class="row">
+        <!-- 引入左側標題 -->
+        <div th:include="common.html :: managerLeftTitle"></div>
+
+        <!--頁面中心-->
+        <div class="col-sm-10">
+            <div class="panel panel-default">
+                <!--面板頭-->
+                <div class="panel-heading text-center">
+                    <h1>圖書類型管理</h1>
+                </div>
+                <!--面板的內容-->
+                <div class="panel-body">
+
+                    <div class="row">
+                        <!-- 新增 -->
+                        <div class="col-sm-4">
+                            <a class="btn btn-success btn-lg" onclick="addBookType()">新增圖書類型</a>
+                        </div>
+                        <!-- 錯誤提示 -->
+                        <div class="col-sm-8" th:if="${failMsg != null}">
+                            <div th:text="${failMsg}" style="font-size: 24px;color: red">123</div>
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered table-condensed text-center" style="margin-top: 10px">
+                        <tr style="font-size: 20px;" class="active">
+                            <th>圖書類型</th>
+                            <th>圖書數量</th>
+                            <th>圖書總銷量</th>
+                            <th>操作</th>
+                            <th>查看所有圖書</th>
+                        </tr>
+
+                        <tr th:each="bookType:${typeList}" style="font-size: 20px">
+                            <td class="bookTypeName" th:text="${bookType.bookTypeName}">笨蛋</td>
+                            <td th:text="${bookType.bookTotalCount}"></td>
+                            <td th:text="${bookType.bookTotalSales}"></td>
+                            <td>
+                                <div th:unless="${bookType.bookTypeId} == 1">
+                                    <a class="btn  btn-info" th:onclick="'editBookType(' + ${bookType.bookTypeId} + ',' +this + ')'">修改</a>
+                                    <a class="btn  btn-danger deleteBtn" href="javascript:;" th:onclick="'deleteType(' + ${bookType.bookTypeId} + ',' +this +')'" >刪除</a>
+                                </div>
+                            </td>
+                            <td>
+                                <a class="btn  btn-success" th:href="@{/book/category/} + ${bookType.bookTypeId} + '/backstage'">查看圖書</a>
+                            </td>
+                        </tr>
+
+                        <script>
+
+                        </script>
+                    </table>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 模態框:新增圖書類型 -->
+<div class="modal fade" id="addBookType">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <!--模態框頭部內容-->
+            <div class="modal-header">
+                <!-- data-dismiss="modal" 具有關閉實質功能-->
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" style="text-align: center">新增圖書類型</h2>
+            </div>
+            <!--模態框內容-->
+            <form class="form-inline" action="/bookType/add" method="post">
+                <div class="modal-body" >
+                    <div style="width: 400px;font-size: 23px;margin: auto">
+                        <div class="form-group">
+                            <label for="bookType">圖書類型:</label>
+                            <input type="text" class="form-control" id="bookType" name="bookType" style="font-size: 20px">
+                        </div>
+                    </div><br>
+                    <!--模態框腳注-->
+                    <div class="modal-footer">
+                        <!-- data-dismiss="modal" 具有關閉實質功能-->
+                        <button type="submit" class="btn btn-primary btn-lg">新增</button>
+                        <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">關閉</button>
+                    </div>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- 模態框:修改圖書類型 -->
+<div class="modal fade" id="editBookType">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <!--模態框頭部內容-->
+            <div class="modal-header">
+                <!-- data-dismiss="modal" 具有關閉實質功能-->
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" style="text-align: center">修改圖書類型</h2>
+            </div>
+            <!--模態框內容-->
+            <form id="editBookTypeForm" class="form-inline" method="post" action="/bookType/update/">
+                <div class="modal-body" >
+                    <div style="width: 400px;font-size: 23px;margin: auto">
+                        <!-- 隱藏域: 圖書類型ID -->
+                        <input type="hidden" class="bookTypeId" name="bookTypeId" value="">
+                        <label>圖書類型:</label>
+                        <input type="text" class="form-control" id="nowBookType" name="newBookTypeName" style="font-size: 20px">
+                    </div><br>
+                    <!--模態框腳注-->
+                    <div class="modal-footer">
+                        <!-- data-dismiss="modal" 具有關閉實質功能-->
+                        <button type="submit" class="btn btn-primary" style="width: 20%;font-size: 16px">修改</button>
+                        <button type="button" class="btn btn-danger" style="width: 20%;font-size: 16px" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+</body>
+</html>
