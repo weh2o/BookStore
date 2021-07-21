@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>個人資料</title>
+    <th:block th:include="common.html :: source"></th:block>
+    <script type="text/javascript" th:src="@{/boot/js/cart.js}"></script>
+
+</head>
+<body>
+
+<!-- 引入頂部介面 -->
+<div th:include="common.html :: header"></div>
+
+<!--頁面主體內容-->
+<!--布局容器-->
+<div class="container" >
+    <div class="row">
+        <!-- 引入左側連結 -->
+        <div th:include="common.html :: userInfo"></div>
+
+        <!--頁面中心-->
+        <div class="col-sm-10">
+            <div class="panel panel-default">
+                <!--面板頭-->
+                <div class="panel-heading text-center">
+                    <h1>個人資料</h1>
+                </div>
+                <!--面板的內容-->
+                <div class="panel-body">
+                    <table class="table table-bordered user-info">
+                        <tr>
+                            <td class="user-title">帳號</td>
+                            <td class="complete-content" th:text="${session.user.userAccount}"></td>
+                        </tr>
+                        <tr>
+                            <td class="user-title">姓名</td>
+                            <td class="complete-content" th:text="${session.user.userName}"></td>
+                        </tr>
+                        <tr>
+                            <td class="user-title">信箱</td>
+                            <td class="complete-content" th:text="${session.user.email}"></td>
+                        </tr>
+                        <tr>
+                            <td class="user-title">電話</td>
+                            <td class="complete-content" th:text="${session.user.phone}"></td>
+                        </tr>
+                        <tr>
+                            <td class="user-title">地址</td>
+                            <td class="complete-content" th:text="${session.user.address}"></td>
+                        </tr>
+                    </table>
+                    <div style="text-align: center;margin-top: 10px">
+                        <a class="btn btn-lg btn-success" style="width: 150px" href="/updateUserInfo">編輯個人資料</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
