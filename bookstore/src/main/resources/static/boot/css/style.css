@@ -1,0 +1,137 @@
+@CHARSET "UTF-8";
+
+/* common */
+.left-title {
+    font-size: 18px;
+}
+.commentFontsize {
+    font-size: 16px;
+
+}
+th {
+    text-align: center;
+}
+
+.commonForm {
+    width: 500px
+}
+
+.singIn-form {
+    width: 330px;
+    margin: 0 auto;
+    font-size: 16px;
+}
+
+.commonBtn {
+    display: inline;
+    width: 40%;
+}
+.btn {
+    font-size: 15px;
+}
+/* index頁面 */
+
+.menu {
+    font-size: 20px;
+}
+.book_price_color {
+    color: red;
+    font-size: 18px
+}
+.book_info {
+    font-size: 17px
+}
+.register_info {
+    font-size: 19px
+}
+
+/* cart頁面 */
+h1{
+    font-weight: bold
+}
+
+.menu {
+    font-size: 20px;
+}
+.cart_info {
+    font-size: 20px;
+    margin-left: 110px
+}
+.cart_totalCount,
+.cart_totalAmount {
+    color: red;
+    font-size: 20px;
+    margin: 10px;
+}
+.cart_msg {
+    color: red;
+}
+.count,
+.cart-subtract,
+.cart-add {
+    display: inline;
+}
+.cart-subtract,
+.cart-add {
+    height: 27px;
+}
+
+.cartCount{
+    margin-top: 40px;width: 40px;text-align: center;
+}
+.cartBelowBtn {
+    width: 200px;font-size: 15px;
+}
+
+/* settlement頁面 */
+h3 {
+    font-weight: bold;
+}
+.consignee-info {
+    width: 500px;
+    margin-top: 10px;
+}
+
+.consignee-info-btn {
+    background-color: #abb1b3;
+    color: white;
+    font-size: 16px;
+}
+
+.user-name,
+.user-phone,
+.user-address {
+    width: 100px;
+    font-size: 18px;
+}
+
+.user-content {
+    width: 300px;
+    font-size: 18px;
+}
+
+/* complete 頁面 */
+
+.complete-info {
+    text-align: center;
+    margin:0 auto;
+    width: 300px;
+}
+.complete-title {
+    width: 100px;
+    font-size: 18px;
+}
+.complete-content {
+    font-size: 18px;
+}
+
+/* userInfo 頁面 */
+.user-info {
+    margin:0 auto;
+    width: 300px;
+}
+.user-title {
+    text-align: center;
+    width: 100px;
+    font-size: 18px;
+}
