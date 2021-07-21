@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登入</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/boot/css/bootstrap.min.css}">
+    <script th:src="@{/boot/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/boot/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/boot/css/style.css}">
+
+</head>
+<body>
+    <!-- 引入頂部介面 -->
+    <div th:include="common.html :: header"></div>
+
+    <div class="container commonForm">
+        <div class="panel panel-success" >
+            <!--面板頭-->
+            <div class="panel-heading" >
+                <h2 class="text-center">登入</h2>
+            </div>
+            <!--面板的內容-->
+            <div class="panel-body">
+                <!--表單-->
+                <form th:action="@{/user/login}" method="post" class="singIn-form" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label for="userName">帳號:</label>
+                        <input type="text" class="form-control" id="userName" name="userAccount" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">密碼:</label>
+                        <input type="password" class="form-control" id="password" name="password" required/>
+                    </div>
+                    <!-- 錯誤提示 -->
+                    <div class="form-group">
+                        <div th:if="${msg != null}" style="color: red;font-size: 20px;text-align: center" th:text="${msg}"></div>
+                    </div>
+                    <div style="text-align: center">
+                        <button type="submit" class="btn btn-lg btn-block btn-primary commonBtn">登入</button>
+                        <button type="button" class="btn btn-lg btn-block btn-danger commonBtn" onclick="returnBack()">返回首頁</button>
+                    </div>
+                    <script>
+                        function returnBack() {
+                            location.href = '[[@{/}]]';
+                        }
+                    </script>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
