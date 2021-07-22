@@ -76,16 +76,42 @@
 
 ## 後台管理
 
-- 管理圖書
+### 管理圖書類型
+![Snipaste_2021-07-22_16-29-50](https://user-images.githubusercontent.com/86906814/126610877-a1b855be-9a4b-4abc-b50e-ca37ac70eae9.jpg)
 
-  添加、刪除、修改圖書
 
-- 管理圖書類型
+#### 新增
+![Snipaste_2021-07-22_16-30-07](https://user-images.githubusercontent.com/86906814/126610921-bdce74f1-cedc-4ae7-a13c-e919ddf0ad20.jpg)
 
-  修改、刪除、查看該類型所有圖書
+**成功後首頁的左側會顯示新增的類型**
+![Snipaste_2021-07-22_16-35-50](https://user-images.githubusercontent.com/86906814/126611302-b5e00b67-5649-445d-b180-7df506730c07.jpg)
 
-- 訂單管理
 
-  變更訂單狀態
+#### 修改
+![Snipaste_2021-07-22_16-30-26](https://user-images.githubusercontent.com/86906814/126610970-7a2b69ab-6480-4772-beb3-096329d04351.jpg)
+
+#### 刪除
+![Snipaste_2021-07-22_16-30-38](https://user-images.githubusercontent.com/86906814/126611113-13e9bfc2-0afe-4d81-8736-ec2e1fd31cda.jpg)
+
+  
+### 圖書管理
+![Snipaste_2021-07-22_16-43-07](https://user-images.githubusercontent.com/86906814/126612091-88d09c50-87c7-4b45-abe7-60a500c014ce.jpg)
+
+#### 新增
+![Snipaste_2021-07-22_16-41-03](https://user-images.githubusercontent.com/86906814/126612111-85ea61a0-cde6-4e08-8e67-5d59fc747561.jpg)
+
+#### 修改
+![Snipaste_2021-07-22_16-41-35](https://user-images.githubusercontent.com/86906814/126612128-990b9cc1-fcfd-4993-91cd-684d10746d57.jpg)
+
+#### 刪除
+![Snipaste_2021-07-22_16-41-53](https://user-images.githubusercontent.com/86906814/126612144-269e5fc6-dc4a-435f-b2dc-67ec9840395e.jpg)
+
+
+## 訂單管理
+![Snipaste_2021-07-22_16-46-56](https://user-images.githubusercontent.com/86906814/126612567-f7135b1c-7474-4843-9460-8d83f22bda6e.jpg)
+
+### 變更訂單狀態
+![Snipaste_2021-07-22_16-48-02](https://user-images.githubusercontent.com/86906814/126612651-a6c99246-e3f3-4c68-89b7-69cce918f7c1.jpg)
+
 
 
