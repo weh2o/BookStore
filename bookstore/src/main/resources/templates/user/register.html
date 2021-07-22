@@ -53,6 +53,9 @@
                         <input type="text" class="form-control" id="address" name="address" required/>
                     </div>
 
+                    <div class="form-group" style="color: red;text-align: center;font-size: 20px;">
+                        <div th:if="${failMsg != null}" th:text="${failMsg}"></div>
+                    </div>
                     <div style="text-align: center">
                         <button type="submit" class="btn btn-lg btn-block btn-primary commonBtn">註冊</button>
                         <button type="button" class="btn btn-lg btn-block btn-danger commonBtn" onclick="returnBack()">返回首頁</button>
