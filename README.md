@@ -47,8 +47,32 @@
 ![Snipaste_2021-07-22_15-30-49](https://user-images.githubusercontent.com/86906814/126604333-612c0f79-2956-47cc-a31f-1fbb8240c7aa.jpg)
 
 ## 購物車
+### 添加商品到購物車
+**點擊按鈕將圖書將入購物車後，會跳出提示框提示用戶**
+![Snipaste_2021-07-22_15-59-22](https://user-images.githubusercontent.com/86906814/126606907-ead22d02-c5f1-4185-9523-3609a6d82c3d.jpg)
 
-添加、刪除商品
+**圖書庫存不足時，添加的按鈕無法點擊**
+![Snipaste_2021-07-22_15-58-14](https://user-images.githubusercontent.com/86906814/126607009-5ecbe3fb-0c70-4548-9843-787bc0a3d65a.jpg)
+
+## 購物車內功能
+### 修改數量
+**點擊畫面中的 + 或 - 按鈕，或是修改框框內的數字，可修改圖書的數量，並即時更新頁面中顯示的商品總數、總金額，數據庫中的數據也會同時修改。**
+![Snipaste_2021-07-22_16-04-23](https://user-images.githubusercontent.com/86906814/126607530-65849a61-e0ad-4b95-82cb-1a453b4667c0.jpg)
+
+### 清空購物車
+**會跳出提示框詢問用戶是否要清空**
+![Snipaste_2021-07-22_16-11-45](https://user-images.githubusercontent.com/86906814/126608382-1a46b469-458e-43e9-840f-ad2fa57c74a0.jpg)
+
+## 確認訂單頁面
+**可查看或編輯收貨人資料，以及再次確認購買的商品內容**
+![Snipaste_2021-07-22_16-14-56](https://user-images.githubusercontent.com/86906814/126608785-d890d0ad-8a2f-45f9-b67a-6619a3f5082f.jpg)
+
+**修改收貨人資料**
+![Snipaste_2021-07-22_16-17-47](https://user-images.githubusercontent.com/86906814/126609077-eecf809c-c4d1-4570-815f-db0705062b9b.jpg)
+
+## 訂單完成
+![Snipaste_2021-07-22_16-22-33](https://user-images.githubusercontent.com/86906814/126609746-3acfa3a0-a01b-4b22-9dfb-ddfddba00f33.jpg)
+
 
 ## 後台管理
 
