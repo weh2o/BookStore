@@ -38,12 +38,13 @@ public class UserController {
      * @return
      */
     @PostMapping("/register")
-    public String register(User user){
+    public String register(User user,Model model){
         try {
             userService.save(user);
         } catch (Exception exception) {
             exception.printStackTrace();
-            return "redirect:/register";
+            model.addAttribute("failMsg","帳號已存在!!");
+            return "/user/register";
         }
         return "redirect:/login";
     }
