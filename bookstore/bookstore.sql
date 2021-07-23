@@ -37,15 +37,15 @@ CREATE TABLE `book` (
 /*Data for the table `book` */
 
 insert  into `book`(`id`,`name`,`author`,`price`,`sales`,`stock`,`photo`,`book_type_id`) values 
-(14,'搶便當的技巧','鈴a',10,4,6,'202107051830055.jpg',6),
-(16,'下船快速入門','富奸',10,10,0,'20210721152329581.jpg',3),
+(14,'搶便當的技巧','鈴a',10,5,5,'202107051830055.jpg',6),
+(16,'下船快速入門','富奸',10,11,0,'20210721152329581.jpg',3),
 (17,'野格炸彈','鈴a',10,4,6,'202107051945023.jpg',3),
 (18,'香蕉','路過的主婦',10,7,3,'202107051951669.jpeg',3),
 (19,'蘋果','路過的主婦',20,2,8,'202107051918684.jpeg',3),
 (20,'西瓜','路過的主婦',30,4,6,'202107051938892.jpeg',2),
 (23,'入門到入土','禿頭',5,4,6,'202107151715736.jpg',4),
 (24,'拐跑別人的媳婦','肥宅',81000,999,0,'202107172238831.jpg',6),
-(25,'JAVA','禿頭',10,0,20,'202107192149775.jpg',2);
+(25,'JAVA','禿頭',10,1,19,'202107192149775.jpg',2);
 
 /*Table structure for table `book_type` */
 
@@ -55,7 +55,7 @@ CREATE TABLE `book_type` (
   `book_type_id` int NOT NULL AUTO_INCREMENT COMMENT '書本類型ID',
   `book_type_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '書本類型名稱',
   PRIMARY KEY (`book_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Data for the table `book_type` */
 
@@ -80,16 +80,9 @@ CREATE TABLE `cart` (
   `create_time` datetime DEFAULT NULL COMMENT '創建時間',
   `update_time` datetime DEFAULT NULL COMMENT '修改時間',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 
 /*Data for the table `cart` */
-
-insert  into `cart`(`id`,`user_id`,`book_id`,`quantity`,`price`,`cost`,`create_time`,`update_time`) values 
-(49,6,16,1,10,10,'2021-07-20 05:21:33','2021-07-20 05:21:33'),
-(50,6,25,1,10,10,'2021-07-20 05:52:00','2021-07-20 05:52:00'),
-(51,6,23,2,5,10,'2021-07-20 16:14:07','2021-07-20 16:14:26'),
-(52,6,20,1,30,30,'2021-07-20 16:14:33','2021-07-20 16:14:33'),
-(53,6,19,1,20,20,'2021-07-20 16:14:50','2021-07-20 16:14:50');
 
 /*Table structure for table `orders` */
 
@@ -106,7 +99,7 @@ CREATE TABLE `orders` (
   `create_time` datetime DEFAULT NULL COMMENT '創建時間',
   `update_time` datetime DEFAULT NULL COMMENT '修改時間',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 /*Data for the table `orders` */
 
@@ -117,7 +110,8 @@ insert  into `orders`(`id`,`orders_no`,`user_id`,`user_name`,`user_address`,`cos
 (31,'202107171806239386',6,'管理員','root',80,2,'2021-07-17 18:06:24','2021-07-18 21:39:08'),
 (32,'202107171808275416',6,'管理員','root',120,0,'2021-07-17 18:08:28','2021-07-17 18:08:28'),
 (33,'202107182141047146',6,'管理員','大平台',45,0,'2021-07-18 21:41:05','2021-07-18 21:41:05'),
-(34,'202107182248339426',6,'管理員','大平台',35,0,'2021-07-18 22:48:34','2021-07-18 22:48:34');
+(34,'202107182248339426',6,'管理員','大平台',35,0,'2021-07-18 22:48:34','2021-07-18 22:48:34'),
+(35,'202107221622210256',6,'管理員','在家工作',30,0,'2021-07-22 16:22:22','2021-07-22 16:22:22');
 
 /*Table structure for table `orders_detail` */
 
@@ -130,7 +124,7 @@ CREATE TABLE `orders_detail` (
   `quantity` int DEFAULT NULL COMMENT '商品數量',
   `cost` double DEFAULT NULL COMMENT '商品總金額',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 /*Data for the table `orders_detail` */
 
@@ -148,7 +142,10 @@ insert  into `orders_detail`(`id`,`orders_id`,`book_id`,`quantity`,`cost`) value
 (27,33,14,1,10),
 (28,33,17,1,10),
 (29,34,23,1,5),
-(30,34,20,1,30);
+(30,34,20,1,30),
+(31,35,16,1,10),
+(32,35,25,1,10),
+(33,35,14,1,10);
 
 /*Table structure for table `user` */
 
@@ -166,13 +163,13 @@ CREATE TABLE `user` (
   `update_time` datetime DEFAULT NULL COMMENT '修改時間',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name` (`user_account`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user` */
 
 insert  into `user`(`id`,`user_account`,`user_name`,`password`,`email`,`phone`,`address`,`create_time`,`update_time`) values 
 (1,'wwww','測試員','123456','12345@gmail.com','0987123123','韓國','2021-07-14 21:15:07','2021-07-14 21:15:07'),
-(6,'root','管理員','123456','root@gmail.com','0987123456','在家工作','2021-07-14 21:48:26','2021-07-18 23:08:05'),
+(6,'root','管理員','123456','root@gmail.com','0987123456','在家工作','2021-07-14 21:48:26','2021-07-22 15:25:49'),
 (12,'pigg','豬哥','123456','12345@gmail.com','0987123456','韓國','2021-07-14 22:59:26','2021-07-14 22:59:26'),
 (13,'kkkk','禿頭俠','123456','12345@gmail.com','0987123456','深海的大鳳梨','2021-07-17 17:42:54','2021-07-17 17:42:54');
 
